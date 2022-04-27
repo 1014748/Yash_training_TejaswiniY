@@ -1,0 +1,293 @@
+Que 1: Create two files one is for item and second for category, 
+   join both files and store them in new file. Join both file on the basis of catid.
+
+tejaswiniyadav@ubuntu:~$ cat item02.txt
+1 Wheet
+2 hair oil
+3 face wash
+4 soap
+tejaswiniyadav@ubuntu:~$ cat category0001.txt
+1 45 Spinach
+2 55 pea
+3 49 Ginger
+4 65 Corn
+
+tejaswiniyadav@ubuntu:~$ join -1 1 -2 1 item02.txt category0001.txt
+1 Wheet 45 Spinach
+2 hair oil 55 pea
+3 face wash 49 Ginger
+4 soap 65 Corn
+
+tejaswiniyadav@ubuntu:~$ join -1 1 -2 1 item02.txt category0001.txt > newfile.txt
+tejaswiniyadav@ubuntu:~$ cat newfile.txt
+1 Wheet 45 Spinach
+2 hair oil 55 pea
+3 face wash 49 Ginger
+4 soap 65 Corn
+
+***************************************************************************
+Que 2: Count all the record from new generated file. Total words in file.
+tejaswiniyadav@ubuntu:~$ cat item02.txt
+1 Wheet
+2 hair oil
+3 face wash
+4 soap
+tejaswiniyadav@ubuntu:~$ wc -w item02.txt
+10 item02.txt
+***************
+tejaswiniyadav@ubuntu:~$ cat name1.txt
+1, anil
+2, sunil
+3, pooja
+4, sonu
+5, kapil
+6, isha
+tejaswiniyadav@ubuntu:~$ wc name1.txt
+ 6 12 51 name1.txt
+tejaswiniyadav@ubuntu:~$ wc -w name1.txt
+******************************************************************************
+Que 3: Write down command to print all price from the file created above.
+
+tejaswiniyadav@ubuntu:~$ cat Product.txt
+A oil
+B Tea
+c Sugar
+D FaceWash
+E Soap
+tejaswiniyadav@ubuntu:~$ cat Pro_Price.txt
+A 159
+B 60
+C 50
+D 289
+E 55
+tejaswiniyadav@ubuntu:~$ comm Product.txt Pro_Price.txt
+	A 159
+A oil
+	B 60
+B Tea
+	C 50
+c Sugar
+	D 289
+D FaceWash
+	E 55
+E Soap
+tejaswiniyadav@ubuntu:~$ join Product.txt Pro_Price.txt
+A oil 159
+B Tea 60
+D FaceWash 289
+E Soap 55
+
+******************************************************************************
+Que 04: Write down command to print all price in sorted order.
+
+tejaswiniyadav@ubuntu:~$ cat > price.txt
+1 laptopLenovo 60000
+2 Keybord 1000
+3 AirtelWifi 1500
+4 mouse 900
+^C
+tejaswiniyadav@ubuntu:~$ awk '{print $3}' price.txt | sort -n
+900
+1000
+1500
+60000
+******************************************************************************
+******************************************************************************
+Que 05:Print out middle price from the list of price.
+
+tejaswiniyadav@ubuntu:~$ cat newfile.txt
+1 Wheet 45 Spinach
+2 hair oil 55 pea
+3 face wash 49 Ginger
+4 soap 65 Corn
+
+tejaswiniyadav@ubuntu:~$ grep -w  "face wash" newfile.txt
+3 face wash 49 Ginger
+
+******************************************************************************
+******************************************************************************
+Que 06:Print out maximum price and minimum price from the list of file.
+tejaswiniyadav@ubuntu:~$ cat num.txt
+40
+78
+670
+70
+8889
+tejaswiniyadav@ubuntu:~$ awk '$1 > maxNum { maxNum = $1 } END { print "Maximum Price is - " maxNum}' num.txt
+Maximum Price is - 8889
+
+******************************************************************************
+******************************************************************************
+Que 07:Search item name and print the line on the terminal
+tejaswiniyadav@ubuntu:~$ cat item02.txt
+1 Wheet
+2 hair oil
+3 face wash
+4 soap
+tejaswiniyadav@ubuntu:~$ grep "Wheet" item02.txt
+1 Wheet
+******************************************************************************
+******************************************************************************
+Que 08:Search item name and print those line which did not matched with the name.
+
+tejaswiniyadav@ubuntu:~$ cat item02.txt
+1 Wheet
+2 hair oil
+3 face wash
+4 soap
+tejaswiniyadav@ubuntu:~$ cat category0001.txt
+1 45 Spinach
+2 55 pea
+3 49 Ginger
+4 65 Corn
+tejaswiniyadav@ubuntu:~$ grep -v "soap" item02.txt category0001.txt
+item02.txt:1 Wheet
+item02.txt:2 hair oil
+item02.txt:3 face wash
+category0001.txt:1 45 Spinach
+category0001.txt:2 55 pea
+category0001.txt:3 49 Ginger
+category0001.txt:4 65 Corn
+******************************************************************************
+******************************************************************************
+Que 09:Use command to print the duplicate the lines for a item.
+
+tejaswiniyadav@ubuntu:~$ cat > Q9Duplicate1.txt
+1 powder 60 
+1 powder 60
+2 oil 80
+3 facecream 79
+^C
+tejaswiniyadav@ubuntu:~$ grep "powder" Q9Duplicate1.txt | uniq -D
+1 powder 60
+1 powder 60 
+******************************************************************************
+******************************************************************************
+Que 10: Create file marks and students. Join them and print the following result.
+
+tejaswiniyadav@ubuntu:~$ cat marks01.txt
+1 65
+2 79
+3 87
+4 81
+5 96
+tejaswiniyadav@ubuntu:~$ cat StudName.txt
+1 Anuradha
+2 Ambrapali
+3 Raj
+4 Ashitosh
+5 Kapil
+tejaswiniyadav@ubuntu:~$ comm StudName.txt marks01.txt
+	1 65
+1 Anuradha
+	2 79
+2 Ambrapali
+	3 87
+3 Raj
+	4 81
+4 Ashitosh
+	5 96
+5 Kapil
+tejaswiniyadav@ubuntu:~$ join StudName.txt marks01.txt
+1 Anuradha 65
+2 Ambrapali 79
+3 Raj 87
+4 Ashitosh 81
+5 Kapil 96
+******************************************************************************
+Que 11:How many student attempt the exam
+tejaswiniyadav@ubuntu:~$ cat > Stud01.txt
+1 I Ishwari Deshmukh
+2 I Ishita Deshpande
+3 A Akanksha Pujari
+4 A Anita Shelke
+^C
+tejaswiniyadav@ubuntu:~$ Stud01.txt
+Stud01.txt: command not found
+tejaswiniyadav@ubuntu:~$ cat Stud01.txt
+1 I Ishwari Deshmukh
+2 I Ishita Deshpande
+3 A Akanksha Pujari
+4 A Anita Shelke
+tejaswiniyadav@ubuntu:~$ grep -w "I" Stud01.txt
+1 I Ishwari Deshmukh
+2 I Ishita Deshpande
+******************************************************************************
+******************************************************************************
+Que 12:How many absent in the exam.
+
+tejaswiniyadav@ubuntu:~$ cat > exam01.txt
+ab rahul         
+pr raj
+ab madhu
+ab mohini
+^C
+tejaswiniyadav@ubuntu:~$ grep -c "ab" exam01.txt
+3
+
+******************************************************************************
+******************************************************************************
+Que 13: Maximum marks obtain by the student, and his name.
+
+tejaswiniyadav@ubuntu:~$ cat num.txt
+40
+78
+670
+70
+8889
+tejaswiniyadav@ubuntu:~$ sort -k 3n num.txt | tail -1
+8889
+***************
+tejaswiniyadav@ubuntu:~$ awk '$1 > maxNum { maxNum = $1 } END { print "Maximum Price is - " maxNum}' num.txt
+Maximum Price is - 8889
+
+******************************************************************************
+******************************************************************************
+Que 14:Minimum marks obtain by the student, and his name.
+tejaswiniyadav@ubuntu:~$ sort -k 3n num.txt | grep -v "ab" |head -1
+40
+******************************************************************************
+Que 15: Print the address and name of student from list .
+
+tejaswiniyadav@ubuntu:~$ cat >  StudName.txt
+1 Anuradha
+2 Ambrapali
+3 Raj
+4 Ashitosh
+5 Kapil
+^C
+tejaswiniyadav@ubuntu:~$ cat > StudAdd.txt
+1 Nagar
+2 Dilli
+3 Hydrabad
+4 Nasik
+5 Nanded
+^C
+tejaswiniyadav@ubuntu:~$ comm StudName.txt StudAdd.txt
+1 Anuradha
+	1 Nagar
+2 Ambrapali
+	2 Dilli
+	3 Hydrabad
+3 Raj
+4 Ashitosh
+	4 Nasik
+5 Kapil
+	5 Nanded
+
+tejaswiniyadav@ubuntu:~$ join StudName.txt StudAdd.txt
+1 Anuradha Nagar
+2 Ambrapali Dilli
+3 Raj Hydrabad
+4 Ashitosh Nasik
+5 Kapil Nanded
+*******************
+commend: awk '{print $2,$5}'completinfo.txt
+
+
+
+
+
+
+
+
